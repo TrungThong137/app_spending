@@ -87,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Column(
         children: [
           Paragraph(
-            content: 'Task List',
+            content: 'Spending',
             style: STYLE_VERY_BIG.copyWith(
               fontWeight: FontWeight.w600,
               fontSize: 40,
@@ -95,10 +95,11 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           Paragraph(
-            content: 'Get things done',
+            textAlign: TextAlign.center,
+            content: ' Revenue and expenditure management',
             style: STYLE_VERY_BIG.copyWith(
               fontWeight: FontWeight.w500,
-              fontSize: 30,
+              fontSize: 25,
               color: AppColors.COLOR_WHITE,
             ),
           )
@@ -117,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
           fit: StackFit.expand,
           children: [
             Container(
-              decoration: const BoxDecoration(color: AppColors.COLOR_PINK),
+              decoration: const BoxDecoration(color: AppColors.PRIMARY_ORANGE),
             ),
             buildContentImageLogin(),
           ],
@@ -211,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Paragraph(
             content: 'Create An Account',
             style: STYLE_MEDIUM.copyWith(
-                color: AppColors.COLOR_PINK_200, fontWeight: FontWeight.w600),
+                color: AppColors.PRIMARY_ORANGE, fontWeight: FontWeight.w600),
           ),
         ),
       ],

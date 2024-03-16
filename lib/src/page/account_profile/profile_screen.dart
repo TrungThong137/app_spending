@@ -107,7 +107,8 @@ class _ProfileAccountScreenState extends State<ProfileAccountScreen> {
   Widget informationUser({String? title, String? content, Color? color}) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: SizeToPadding.sizeSmall),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Paragraph(
             content: '$title',
@@ -145,6 +146,12 @@ class _ProfileAccountScreenState extends State<ProfileAccountScreen> {
               },
               child: informationUser(
                   title: 'Log Out', color: AppColors.Red_Money)),
+          // GestureDetector(
+          //     onTap: () async {
+          //       await onDeleteAccount();
+          //     },
+          //     child: informationUser(
+          //         title: 'Delete Account', color: AppColors.Red_Money)),
         ],
       ),
     );

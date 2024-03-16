@@ -65,11 +65,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.COLOR_PINK_200,
+      backgroundColor: AppColors.PRIMARY_ORANGE,
       body: SafeArea(
         child: Center(
           child: Paragraph(
-            content: 'Task List',
+            content: 'Spending',
             style: STYLE_MEDIUM.copyWith(
                 fontWeight: FontWeight.bold,
                 fontSize: 50.0,

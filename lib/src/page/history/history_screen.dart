@@ -71,6 +71,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          leading: null,
           centerTitle: true,
           title: Paragraph(
             content: 'History',
@@ -132,26 +133,29 @@ class _HistoryScreenState extends State<HistoryScreen> {
           )
         ],
       ),
-      child: Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15),
         child: Container(
           padding: EdgeInsets.all(SizeToPadding.sizeMedium),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(BorderRadiusSize.sizeMedium)),
-          ),
+              borderRadius: BorderRadius.all(
+                  Radius.circular(BorderRadiusSize.sizeMedium)),
+              color: Colors.grey.withOpacity(0.08)),
           child: Column(
             children: [
               buildMoney(index),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: SizeToPadding.sizeSmall),
+                padding:
+                    EdgeInsets.symmetric(vertical: SizeToPadding.sizeSmall),
                 child: buildInfoCard(
                   title: 'Note:',
                   content: listSpending[index].note,
                 ),
               ),
               buildInfoCard(
-                iconData: Icons.calendar_month,
-                content: AppDateUtils.formatDaTime(listSpending[index].dateTime)
-              )
+                  iconData: Icons.calendar_month,
+                  content:
+                      AppDateUtils.formatDaTime(listSpending[index].dateTime))
             ],
           ),
         ),
@@ -159,29 +163,26 @@ class _HistoryScreenState extends State<HistoryScreen> {
     );
   }
 
-  Widget buildMoney(int index){
+  Widget buildMoney(int index) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Paragraph(
           content: 'Money',
-          style: STYLE_MEDIUM.copyWith(
-            fontWeight: FontWeight.w600
-          ),
+          style: STYLE_MEDIUM.copyWith(fontWeight: FontWeight.w600),
         ),
         Container(
-          width: MediaQuery.sizeOf(context).width-200,
+          width: MediaQuery.sizeOf(context).width - 200,
           alignment: Alignment.centerRight,
           child: Paragraph(
-            content: (listSpending[index].moneySpending??0)!=0
-            ? '- ${AppCurrencyFormat.formatMoneyD(listSpending[index].moneySpending??0)}'
-            : '+ ${AppCurrencyFormat.formatMoneyD(listSpending[index].moneyIncome??0)}',
+            content: (listSpending[index].moneySpending ?? 0) != 0
+                ? '- ${AppCurrencyFormat.formatMoneyD(listSpending[index].moneySpending ?? 0)}'
+                : '+ ${AppCurrencyFormat.formatMoneyD(listSpending[index].moneyIncome ?? 0)}',
             style: STYLE_MEDIUM.copyWith(
-              color: (listSpending[index].moneySpending??0)!=0
-              ? AppColors.PRIMARY_RED
-              : AppColors.Green_Money,
-              fontWeight: FontWeight.w600
-            ),
+                color: (listSpending[index].moneySpending ?? 0) != 0
+                    ? AppColors.PRIMARY_RED
+                    : AppColors.Green_Money,
+                fontWeight: FontWeight.w600),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -190,20 +191,19 @@ class _HistoryScreenState extends State<HistoryScreen> {
     );
   }
 
-  Widget buildInfoCard({String? title, String? content, IconData? iconData}){
+  Widget buildInfoCard({String? title, String? content, IconData? iconData}) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        iconData!=null? 
-        Icon(iconData)
-        :Paragraph(
-          content: title,
-          style: STYLE_MEDIUM.copyWith(fontWeight: FontWeight.w600),
-        ),
+        iconData != null
+            ? Icon(iconData)
+            : Paragraph(
+                content: title,
+                style: STYLE_MEDIUM.copyWith(fontWeight: FontWeight.w600),
+              ),
         Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: SizeToPadding.sizeSmall),
-          width: MediaQuery.sizeOf(context).width-150,
+          padding: EdgeInsets.symmetric(horizontal: SizeToPadding.sizeSmall),
+          width: MediaQuery.sizeOf(context).width - 150,
           child: Paragraph(
             content: content,
             style: STYLE_MEDIUM.copyWith(),

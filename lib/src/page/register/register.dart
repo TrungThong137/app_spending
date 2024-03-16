@@ -123,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
         Paragraph(
-          content: 'Start organizing tasks',
+          content: 'Start organizing spending',
           style: STYLE_VERY_BIG.copyWith(
             fontWeight: FontWeight.w600,
             fontSize: 30,
@@ -144,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           fit: StackFit.expand,
           children: [
             Container(
-              decoration: const BoxDecoration(color: AppColors.COLOR_TEAL),
+              decoration: const BoxDecoration(color: AppColors.COLOR_PINK_200),
             ),
             buildContentHeaderRegister(),
           ],

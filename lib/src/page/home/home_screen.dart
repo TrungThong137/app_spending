@@ -23,8 +23,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  int selectButton=0;
+  int selectButton = 0;
 
   late TextEditingController noteController;
   late TextEditingController moneyController;
@@ -34,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool isEnableButton = false;
 
-  List<String> listButtonSelect=[
+  List<String> listButtonSelect = [
     'Spending',
     'Income',
   ];
@@ -65,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          leading: null,
           centerTitle: true,
           title: Paragraph(
             content: 'Home',
@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildButtonSpending(){
+  Widget buildButtonSpending() {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: Center(
@@ -101,11 +101,11 @@ class _HomeScreenState extends State<HomeScreen> {
           thumbColor: AppColors.PRIMARY_ORANGE,
           children: <int, Widget>{
             for (int i = 0; i < listButtonSelect.length; i++)
-              i:  Container(
+              i: Container(
                 alignment: Alignment.center,
                 width: 80,
                 height: 40,
-                child:  Paragraph(
+                child: Paragraph(
                   content: listButtonSelect[i],
                   style: STYLE_MEDIUM.copyWith(
                     fontWeight: FontWeight.w600,
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildFormInput(){
+  Widget buildFormInput() {
     return Container(
       margin: EdgeInsets.only(
         top: SizeToPadding.sizeMedium,
@@ -145,14 +145,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildFieldMoney(){
+  Widget buildFieldMoney() {
     return AppFormField(
       validator: messageMoney,
       textEditingController: moneyController,
       keyboardType: TextInputType.number,
-      labelText: selectButton==0? 'Spending Money' : 'Income Money',
+      labelText: selectButton == 0 ? 'Spending Money' : 'Income Money',
       hintText: 'Enter money',
-      onChanged: (value) async{
+      onChanged: (value) async {
         await validMoney(value);
         await onEnableButton();
       },
@@ -192,12 +192,16 @@ class _HomeScreenState extends State<HomeScreen> {
   void onSave() {
     LoadingDialog.showLoadingDialog(context);
     FireStoreSpending.createSpendingFirebase(SpendingModel(
-      dateTime: dateTime.toString(),
-      idUser: FirebaseAuth.instance.currentUser?.uid,
-      note: noteController.text.trim(),
-      moneyIncome: selectButton==0? 0 : double.parse(moneyController.text.trim()),
-      moneySpending: selectButton==0? double.parse(moneyController.text.trim()) : 0
-    )).then((value) async{
+            dateTime: dateTime.toString(),
+            idUser: FirebaseAuth.instance.currentUser?.uid,
+            note: noteController.text.trim(),
+            moneyIncome: selectButton == 0
+                ? 0
+                : double.parse(moneyController.text.trim()),
+            moneySpending: selectButton == 0
+                ? double.parse(moneyController.text.trim())
+                : 0))
+        .then((value) async {
       LoadingDialog.hideLoadingDialog(context);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Paragraph(
@@ -213,18 +217,18 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<void> validMoney(String? value)async{
-    final result= AppValid.validMoney(value);
-    if(result!=null){
-      messageMoney=result;
-    }else{
-      messageMoney=null;
+  Future<void> validMoney(String? value) async {
+    final result = AppValid.validMoney(value);
+    if (result != null) {
+      messageMoney = result;
+    } else {
+      messageMoney = null;
     }
-    setState(() { });
+    setState(() {});
   }
 
-  Future<void> onEnableButton() async{
-    if (moneyController.text==''|| messageMoney!=null) {
+  Future<void> onEnableButton() async {
+    if (moneyController.text == '' || messageMoney != null) {
       isEnableButton = false;
     } else {
       isEnableButton = true;
@@ -232,16 +236,16 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-  Future<void> clearData()async{
-    noteController.text='';
-    moneyController.text='';
+  Future<void> clearData() async {
+    noteController.text = '';
+    moneyController.text = '';
     await onEnableButton();
-    setState(() { });
+    setState(() {});
   }
 
-  void onChangeButtonSelect(int i){
-    selectButton=i;
-    setState(() { });
+  void onChangeButtonSelect(int i) {
+    selectButton = i;
+    setState(() {});
   }
 
   @override
